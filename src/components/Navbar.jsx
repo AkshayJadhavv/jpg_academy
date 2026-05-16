@@ -17,7 +17,9 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
+
     window.addEventListener('scroll', onScroll, { passive: true });
+
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -38,21 +40,39 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-20">
+        
         {/* Logo */}
-        <a href="#home" onClick={(e) => { e.preventDefault(); handleNav('#home'); }} className="flex items-center gap-3 group">
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNav('#home');
+          }}
+          className="flex items-center gap-3 group"
+        >
           <div className="relative">
+            <img
+              src="https://customer-assets.emergentagent.com/job_530e28b2-cc7b-4d96-afad-71eaf378d86f/artifacts/fqrrhy00_New%20Logo.png"
+              alt="JBG Academy Logo"
+              className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+
             <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center font-display font-bold text-[#050505] text-lg"
-              style={{ background: 'linear-gradient(135deg, #D4AF37, #F0D060)' }}
-            >
-              J
-            </div>
-            <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ boxShadow: '0 0 20px rgba(212,175,55,0.8)' }} />
+              className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                boxShadow: '0 0 25px rgba(212,175,55,0.7)',
+              }}
+            />
           </div>
+
           <div>
-            <div className="font-display font-bold text-white text-lg leading-none tracking-wide">JBG Academy</div>
-            <div className="font-sans text-gold text-[9px] tracking-[0.3em] uppercase mt-0.5">of Design</div>
+            <div className="font-display font-bold text-white text-lg leading-none tracking-wide">
+              JBG Academy
+            </div>
+
+            <div className="font-sans text-gold text-[9px] tracking-[0.3em] uppercase mt-0.5">
+              of Design
+            </div>
           </div>
         </a>
 
@@ -62,12 +82,20 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              onClick={(e) => { e.preventDefault(); handleNav(link.href); }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav(link.href);
+              }}
               className="relative font-sans text-sm font-medium text-white/70 hover:text-white transition-colors duration-300 group py-2"
             >
               {link.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-400"
-                style={{ background: 'linear-gradient(90deg, #D4AF37, #F0D060)' }} />
+
+              <span
+                className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-400"
+                style={{
+                  background: 'linear-gradient(90deg, #D4AF37, #F0D060)',
+                }}
+              />
             </a>
           ))}
         </nav>
@@ -75,7 +103,10 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="#contact"
-          onClick={(e) => { e.preventDefault(); handleNav('#contact'); }}
+          onClick={(e) => {
+            e.preventDefault();
+            handleNav('#contact');
+          }}
           className="hidden lg:block gold-btn text-xs"
         >
           Enquire Now
@@ -106,7 +137,10 @@ export default function Navbar() {
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNav(link.href); }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNav(link.href);
+                  }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }}
@@ -115,9 +149,13 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
+
               <motion.a
                 href="#contact"
-                onClick={(e) => { e.preventDefault(); handleNav('#contact'); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav('#contact');
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
