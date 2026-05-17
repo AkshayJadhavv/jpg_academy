@@ -23,9 +23,10 @@ export default {
         }
       },
       fontFamily: {
-        display: ['Playfair Display', 'Georgia', 'serif'],
-        body: ['Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['Montserrat', 'sans-serif'],
+        // CHANGED: Replaced with Bell MT
+        display: ['Bell MT', 'Playfair Display', 'Baskerville', 'Georgia', 'serif'],
+        body: ['Bell MT', 'Baskerville', 'Georgia', 'Times New Roman', 'serif'],
+        sans: ['Bell MT', 'Baskerville', 'Georgia', 'serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

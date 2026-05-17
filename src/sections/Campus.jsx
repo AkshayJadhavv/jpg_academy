@@ -73,20 +73,6 @@ export default function Campus() {
           {/* Overlay gradient for better text visibility */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/60 via-transparent to-transparent pointer-events-none" />
 
-          {/* Bottom info */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 pointer-events-none">
-            <div className="flex flex-wrap gap-4">
-              {['Design Studios', 'Computer Labs', 'Event Hall', 'Library'].map((item) => (
-                <span
-                  key={item}
-                  className="font-sans text-xs tracking-wider uppercase text-white/80 px-3 py-1.5 rounded-full"
-                  style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.2)' }}
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
         </motion.div>
 
         {/* Bottom Grid Highlights */}

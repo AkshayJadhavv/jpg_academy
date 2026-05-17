@@ -1,12 +1,12 @@
-
-
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { reelsData, reelCategories } from '../data/reelsData';
-import ReelCard from '../components/ReelCard';
+import { reelsData } from '../data/reelsData';
+import InstagramReelCard from '../components/InstagramReelCard';
 import InstagramCTA from '../components/InstagramCTA';
 import { Sparkles, ChevronDown } from 'lucide-react';
+
+const INITIAL_VISIBLE = 4;
 
 // Decorative background grid lines
 function GridLines() {
@@ -30,75 +30,22 @@ function GridLines() {
   );
 }
 
-// Filter pill button
-function FilterBtn({ label, active, onClick }) {
-  return (
-    <motion.button
-      onClick={onClick}
-      whileTap={{ scale: 0.95 }}
-      className="relative font-sans text-xs tracking-widest uppercase px-5 py-2.5 rounded-full transition-all duration-400 whitespace-nowrap"
-      style={
-        active
-          ? {
-              background: 'linear-gradient(135deg, #D4AF37, #F0D060, #A8861A)',
-              color: '#050505',
-              fontWeight: 700,
-              boxShadow: '0 0 22px rgba(212,175,55,0.45)',
-            }
-          : {
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(212,175,55,0.18)',
-              color: 'rgba(255,255,255,0.55)',
-            }
-      }
-    >
-      {label}
-      {active && (
-        <motion.div
-          layoutId="activeFilterPill"
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: 'linear-gradient(135deg, #D4AF37, #F0D060, #A8861A)',
-            zIndex: -1,
-          }}
-        />
-      )}
-    </motion.button>
-  );
-}
-
-const INITIAL_VISIBLE = 6;
-
 export default function ReelsShowcase() {
   const { ref, isVisible } = useScrollReveal(0.08);
-  const [activeCategory, setActiveCategory] = useState('All');
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
-  const sectionRef = useRef(null);
 
-  const filtered =
-    activeCategory === 'All'
-      ? reelsData
-      : reelsData.filter((r) => r.category === activeCategory);
-
-  const displayed = filtered.slice(0, visibleCount);
-  const hasMore = visibleCount < filtered.length;
-
-  // Reset visible count when filter changes
-  const handleCategoryChange = (cat) => {
-    setActiveCategory(cat);
-    setVisibleCount(INITIAL_VISIBLE);
-  };
+  const displayed = reelsData.slice(0, visibleCount);
+  const hasMore = visibleCount < reelsData.length;
 
   return (
     <section
       id="reels"
-      ref={sectionRef}
       className="relative py-28 px-6 bg-[#060606] overflow-hidden"
     >
-      {/* Decorative grid */}
+      {/* ── Decorative grid ── */}
       <GridLines />
 
-      {/* Glow orbs */}
+      {/* ── Glow orbs ── */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-64 blur-3xl opacity-[0.06] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, #D4AF37, transparent)' }}
@@ -108,7 +55,7 @@ export default function ReelsShowcase() {
         style={{ background: 'radial-gradient(circle, #833ab4, transparent)' }}
       />
 
-      {/* Top border shimmer */}
+      {/* ── Top border shimmer ── */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}
@@ -144,16 +91,15 @@ export default function ReelsShowcase() {
             className="font-display font-bold text-white mb-4 leading-tight"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.8rem)' }}
           >
-            Creative{' '}
+            Student Reels &amp;{' '}
             <span
               className="text-transparent bg-clip-text italic"
               style={{
                 backgroundImage: 'linear-gradient(135deg, #D4AF37, #F0D060, #D4AF37)',
               }}
             >
-              Reels
-            </span>{' '}
-            Showcase
+              Campus Life
+            </span>
           </h2>
 
           {/* Divider */}
@@ -163,48 +109,31 @@ export default function ReelsShowcase() {
           />
 
           <p className="font-body text-lg text-white/55 max-w-2xl mx-auto leading-relaxed">
-            Explore student creativity, workshops, events, and behind-the-scenes moments
-            from JBG Academy — one reel at a time.
+            A glimpse into the creative energy, hands-on workshops, and vibrant
+            student community that define life at JBG Academy.
           </p>
-        </motion.div>
-
-        {/* ── Category Filter Tabs ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {reelCategories.map((cat) => (
-            <FilterBtn
-              key={cat}
-              label={cat}
-              active={activeCategory === cat}
-              onClick={() => handleCategoryChange(cat)}
-            />
-          ))}
         </motion.div>
 
         {/* ── Reels Grid ── */}
         <motion.div
           layout
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 xl:gap-7"
         >
           <AnimatePresence mode="popLayout">
             {displayed.map((reel, i) => (
-              <ReelCard key={reel.id} reel={reel} index={i} />
+              <InstagramReelCard key={reel.id} reel={reel} index={i} />
             ))}
           </AnimatePresence>
         </motion.div>
 
         {/* ── Empty state ── */}
-        {filtered.length === 0 && (
+        {reelsData.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <p className="font-sans text-white/30 text-sm">No reels in this category yet.</p>
+            <p className="font-sans text-white/30 text-sm">No reels available yet.</p>
           </motion.div>
         )}
 
@@ -239,7 +168,7 @@ export default function ReelsShowcase() {
               }}
             >
               <ChevronDown size={16} />
-              Load More Reels ({filtered.length - visibleCount} remaining)
+              Load More Reels ({reelsData.length - visibleCount} remaining)
             </motion.button>
           </motion.div>
         )}
@@ -248,7 +177,7 @@ export default function ReelsShowcase() {
         <InstagramCTA />
       </div>
 
-      {/* Bottom border shimmer */}
+      {/* ── Bottom border shimmer ── */}
       <div
         className="absolute bottom-0 left-0 right-0 h-px"
         style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}

@@ -100,7 +100,7 @@ export default function InstagramCTA() {
               }}
             >
               <InstagramIcon size={12} className="text-gold" />
-              @jbgacademy
+              @jbg_academy_of_design
             </span>
 
             <h3 className="font-display text-3xl md:text-4xl font-bold text-white leading-tight mb-3">
@@ -122,7 +122,7 @@ export default function InstagramCTA() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               {/* Primary Instagram CTA */}
               <motion.a
-                href="https://www.instagram.com/jbgacademy/"
+                href="https://www.instagram.com/jbg_academy_of_design?igsh=MzhyZG9pZHN2cGky"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04, y: -2 }}
@@ -141,7 +141,7 @@ export default function InstagramCTA() {
 
               {/* Secondary gold CTA */}
               <motion.a
-                href="https://www.instagram.com/jbgacademy/"
+                href="https://www.instagram.com/jbg_academy_of_design?igsh=MzhyZG9pZHN2cGky"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04, y: -2 }}
@@ -178,9 +178,9 @@ export default function InstagramCTA() {
           className="flex-shrink-0 flex sm:flex-col gap-6"
         >
           {[
-            { value: '5K+', label: 'Followers' },
-            { value: '120+', label: 'Posts' },
-            { value: '50+', label: 'Reels' },
+            { value: '1k+', label: 'Followers' },
+            { value: '84+', label: 'Posts' },
+            { value: '40+', label: 'Reels' },
           ].map((stat) => (
             <div
               key={stat.label}
