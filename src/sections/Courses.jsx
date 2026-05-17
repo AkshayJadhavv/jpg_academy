@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { CheckCircle2, ChevronDown, Clock, GraduationCap, IndianRupee } from 'lucide-react';
+import { CheckCircle2, ChevronDown, Clock, GraduationCap, IndianRupee, HelpCircle, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 
 const courseOptions = [
@@ -218,6 +218,82 @@ function CourseCard({ course, index, isVisible, openIndex, setOpenIndex }) {
   );
 }
 
+// Career Counseling CTA Component
+function CareerCounselingCTA() {
+  const { ref, isVisible } = useScrollReveal(0.1);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: 0.2 }}
+      className="mt-20 relative"
+    >
+      {/* Glow background */}
+      <div className="absolute inset-0 rounded-3xl blur-3xl opacity-20 pointer-events-none"
+        style={{ background: 'radial-gradient(circle, #D4AF37, transparent)' }} />
+      
+      {/* Main CTA Card */}
+      <div 
+        className="relative rounded-3xl p-8 md:p-12 text-center overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.02) 100%)',
+          border: '1px solid rgba(212,175,55,0.25)',
+          boxShadow: '0 0 60px rgba(212,175,55,0.1)',
+        }}
+      >
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -mr-32 -mt-32" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -ml-32 -mb-32" />
+        
+        {/* Icon */}
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6"
+          style={{
+            background: 'linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05))',
+            border: '1px solid rgba(212,175,55,0.3)',
+          }}
+        >
+          <HelpCircle size={32} className="text-gold" />
+        </div>
+
+        {/* Title */}
+        <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
+          Not Sure Which Course to Choose?
+        </h3>
+        
+        {/* Description */}
+        <p className="font-body text-base md:text-lg text-white/60 max-w-2xl mx-auto mb-8">
+          Our counselors are here to help you find the perfect course that aligns with your career goals
+        </p>
+        
+        {/* CTA Button */}
+        <a
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-105"
+          style={{
+            background: 'linear-gradient(135deg, #D4AF37, #F0D060, #A8861A)',
+            color: '#050505',
+            boxShadow: '0 0 30px rgba(212,175,55,0.4)',
+          }}
+        >
+          Get Free Career Counseling
+          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+        </a>
+
+        {/* Small note */}
+        <p className="font-sans text-[10px] text-white/30 mt-6">
+          Limited slots available for counseling sessions
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Courses() {
   const { ref, isVisible } = useScrollReveal(0.1);
   const [openIndex, setOpenIndex] = useState(null);
@@ -258,6 +334,9 @@ export default function Courses() {
             />
           ))}
         </div>
+
+        {/* Career Counseling CTA - Added after courses */}
+        <CareerCounselingCTA />
       </div>
     </section>
   );
