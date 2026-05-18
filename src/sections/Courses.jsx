@@ -27,37 +27,37 @@ const courseOptions = [
 const courses = [
   {
     title: 'Fashion Design',
-    image: '/courses/fashiondesign.png',
+    image: 'images/courses/fashiondesign.png',
     desc: 'Master the art of clothing design, textile science, and fashion illustration with hands-on studio practice.',
     highlights: ['Pattern Making & Draping', 'Fashion Illustration', 'Textile Science', 'Portfolio Development'],
   },
   {
     title: 'Interior Design',
-    image: '/courses/interiordesign.png',
+    image: 'images/courses/interiordesign.png',
     desc: 'Learn to transform spaces beautifully — from residential homes to commercial spaces with professional design software.',
     highlights: ['Space Planning', 'AutoCAD & 3D Studio', 'Material Selection', 'Client Presentation'],
   },
   {
     title: 'Graphic Design',
-    image: '/courses/graphicdesign.png',
+    image: 'images/courses/graphicdesign.png',
     desc: 'Build visual communication skills across branding, print, and digital media using industry-standard tools.',
     highlights: ['Adobe Suite Mastery', 'Brand Identity Design', 'Print & Digital Media', 'Typography & Layout'],
   },
   {
     title: 'Animation',
-    image: '/courses/animation.png',
+    image: 'images/courses/animation.png',
     desc: 'Bring stories to life through 2D and 3D animation techniques used in film, gaming, and digital media.',
     highlights: ['2D & 3D Animation', 'Character Design', 'Storyboarding', 'After Effects & Maya'],
   },
   {
     title: 'VFX',
-    image: '/courses/vfx.png',
+    image: 'images/courses/vfx.png',
     desc: 'Create stunning visual effects for films and digital platforms with cutting-edge compositing and CGI techniques.',
     highlights: ['Compositing', 'Motion Graphics', 'CGI & Rendering', 'Nuke & Houdini'],
   },
   {
     title: 'Event Management',
-    image: '/courses/eventmangement.png',
+    image: 'images/courses/eventmangement.png',
     desc: 'Plan, produce, and execute memorable events — from corporate conferences to grand weddings and cultural festivals.',
     highlights: ['Event Planning & Design', 'Vendor Management', 'Budget & Logistics', 'Live Event Production'],
   },

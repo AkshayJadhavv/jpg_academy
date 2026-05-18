@@ -6,7 +6,7 @@ export const blogData = [
       category: "Fashion Design",
       date: "March 15, 2026",
       readTime: "5 min read",
-      image: "blog/blog1.jpeg",
+      image: "images/blog/blog1.jpeg",
       slug: "top-careers-fashion-design"
     },
     {
@@ -16,7 +16,7 @@ export const blogData = [
       category: "Interior Design",
       date: "March 10, 2026",
       readTime: "4 min read",
-      image: "blog/blog2.jpeg",
+      image: "images/blog/blog2.jpeg",
       slug: "interior-design-future"
     },
     {
@@ -26,7 +26,7 @@ export const blogData = [
       category: "Events",
       date: "March 5, 2026",
       readTime: "3 min read",
-      image: "blog/blog3.jpeg",
+      image: "images/blog/blog3.jpeg",
       slug: "student-workshop-highlights"
     },
     {
@@ -36,7 +36,7 @@ export const blogData = [
       category: "Event Management",
       date: "February 20, 2026",
       readTime: "4 min read",
-      image: "blog/blog4.jpeg",
+      image: "images/blog/blog4.jpeg",
       slug: "event-management-success"
     },
   ];
