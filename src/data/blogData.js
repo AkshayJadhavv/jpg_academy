@@ -6,7 +6,7 @@ export const blogData = [
       category: "Fashion Design",
       date: "March 15, 2026",
       readTime: "5 min read",
-      image: "/images/blogs/fashion-careers.jpg",
+      image: "blog/blog1.jpeg",
       slug: "top-careers-fashion-design"
     },
     {
@@ -16,7 +16,7 @@ export const blogData = [
       category: "Interior Design",
       date: "March 10, 2026",
       readTime: "4 min read",
-      image: "/images/blogs/interior-future.jpg",
+      image: "blog/blog2.jpeg",
       slug: "interior-design-future"
     },
     {
@@ -26,37 +26,17 @@ export const blogData = [
       category: "Events",
       date: "March 5, 2026",
       readTime: "3 min read",
-      image: "/images/blogs/workshop.jpg",
+      image: "blog/blog3.jpeg",
       slug: "student-workshop-highlights"
     },
     {
       id: 4,
-      title: "Animation Industry Trends Shaping 2026",
-      excerpt: "From AI-assisted animation to real-time rendering, discover what's next in the animation world.",
-      category: "Animation",
-      date: "February 28, 2026",
-      readTime: "6 min read",
-      image: "/images/blogs/animation-trends.jpg",
-      slug: "animation-industry-trends"
-    },
-    {
-      id: 5,
       title: "Event Management Success Stories: From Concept to Reality",
       excerpt: "Inspiring stories of our alumni who have created unforgettable events and experiences.",
       category: "Event Management",
       date: "February 20, 2026",
       readTime: "4 min read",
-      image: "/images/blogs/event-success.jpg",
+      image: "blog/blog4.jpeg",
       slug: "event-management-success"
     },
-    {
-      id: 6,
-      title: "The Art of Visual Storytelling in Graphic Design",
-      excerpt: "Mastering the techniques of compelling visual narratives in modern graphic design.",
-      category: "Graphic Design",
-      date: "February 15, 2026",
-      readTime: "5 min read",
-      image: "/images/blogs/visual-storytelling.jpg",
-      slug: "visual-storytelling-graphic-design"
-    }
   ];

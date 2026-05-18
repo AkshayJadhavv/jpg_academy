@@ -30,7 +30,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-5">
               {/* Logo instead of "J" */}
               <img 
-                src="logo/logo.jpeg" 
+                src="https://customer-assets.emergentagent.com/job_530e28b2-cc7b-4d96-afad-71eaf378d86f/artifacts/fqrrhy00_New%20Logo.png" 
                 alt="JBG Academy Logo" 
                 className="w-10 h-10 object-contain rounded-lg"
                 onError={(e) => {

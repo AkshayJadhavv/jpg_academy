@@ -218,7 +218,7 @@ function CourseCard({ course, index, isVisible, openIndex, setOpenIndex }) {
   );
 }
 
-// Career Counseling CTA Component
+// Career Counseling CTA Component - Glow Removed
 function CareerCounselingCTA() {
   const { ref, isVisible } = useScrollReveal(0.1);
 
@@ -230,22 +230,15 @@ function CareerCounselingCTA() {
       transition={{ duration: 0.7, delay: 0.2 }}
       className="mt-20 relative"
     >
-      {/* Glow background */}
-      <div className="absolute inset-0 rounded-3xl blur-3xl opacity-20 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #D4AF37, transparent)' }} />
-      
-      {/* Main CTA Card */}
+      {/* Main CTA Card - Glow removed */}
       <div 
         className="relative rounded-3xl p-8 md:p-12 text-center overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.02) 100%)',
           border: '1px solid rgba(212,175,55,0.25)',
-          boxShadow: '0 0 60px rgba(212,175,55,0.1)',
         }}
       >
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -mr-32 -mt-32" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -ml-32 -mb-32" />
+        {/* Decorative elements removed */}
         
         {/* Icon */}
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6"
@@ -278,7 +271,6 @@ function CareerCounselingCTA() {
           style={{
             background: 'linear-gradient(135deg, #D4AF37, #F0D060, #A8861A)',
             color: '#050505',
-            boxShadow: '0 0 30px rgba(212,175,55,0.4)',
           }}
         >
           Get Free Career Counseling

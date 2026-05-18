@@ -1,4 +1,4 @@
-import { motion, useMotionValue, animate } from 'framer-motion';
+import { motion, useMotionValue, animate, useTransform } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ZoomIn, Sparkles } from 'lucide-react';
 import { studentWorkData } from '../data/studentWorkData';
@@ -10,15 +10,79 @@ const StudentWorkShowcase = () => {
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef(null);
   const scrollContainerRef = useRef(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const autoScrollInterval = useRef(null);
   
   const filteredWorks = activeCategory === "All" 
     ? studentWorkData.all 
     : studentWorkData.all.filter(item => item.category === activeCategory);
 
+  // Auto-scroll function
+  const startAutoScroll = () => {
+    if (autoScrollInterval.current) {
+      clearInterval(autoScrollInterval.current);
+    }
+    
+    autoScrollInterval.current = setInterval(() => {
+      if (scrollContainerRef.current && !isHovered && isAutoScrolling) {
+        const container = scrollContainerRef.current;
+        const scrollAmount = 1;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        if (container.scrollLeft + container.clientWidth >= maxScroll - 1) {
+          // Reset to start for infinite loop
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }
+    }, 30);
+  };
+
+  const stopAutoScroll = () => {
+    if (autoScrollInterval.current) {
+      clearInterval(autoScrollInterval.current);
+      autoScrollInterval.current = null;
+    }
+  };
+
+  // Start/stop auto-scroll based on hover state
+  useEffect(() => {
+    if (isHovered) {
+      stopAutoScroll();
+    } else {
+      startAutoScroll();
+    }
+    
+    return () => {
+      stopAutoScroll();
+    };
+  }, [isHovered, filteredWorks.length]);
+
+  // Reset scroll position when category changes
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = 0;
+    }
+    // Restart auto-scroll after category change
+    if (!isHovered) {
+      stopAutoScroll();
+      startAutoScroll();
+    }
+  }, [activeCategory]);
+
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const scrollAmount = direction === 'left' ? -400 : 400;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  // Manual scroll with mouse wheel
+  const handleWheel = (e) => {
+    if (scrollContainerRef.current) {
+      e.preventDefault();
+      scrollContainerRef.current.scrollBy({ left: e.deltaY, behavior: 'smooth' });
     }
   };
 
@@ -70,8 +134,22 @@ const StudentWorkShowcase = () => {
           ))}
         </motion.div>
 
+        {/* Auto-scroll indicator */}
+        <div className="text-center mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/20">
+            <div className={`w-2 h-2 rounded-full ${isAutoScrolling && !isHovered ? 'bg-gold animate-pulse' : 'bg-white/30'}`} />
+            <span className="font-sans text-[10px] text-gold tracking-wider">
+              {isHovered ? '' : ''}
+            </span>
+          </div>
+        </div>
+
         {/* Gallery Container with Navigation */}
-        <div className="relative group">
+        <div 
+          className="relative group"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           {/* Left Navigation */}
           <button
             onClick={() => scroll('left')}
@@ -85,8 +163,7 @@ const StudentWorkShowcase = () => {
             ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto scrollbar-hide pb-8 px-4 scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onWheel={handleWheel}
           >
             {filteredWorks.map((work, index) => (
               <motion.div
@@ -96,7 +173,9 @@ const StudentWorkShowcase = () => {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 viewport={{ once: true, margin: "-100px" }}
                 whileHover={{ y: -10 }}
-                className="flex-shrink-0 w-72 md:w-80 lg:w-96 group/card"
+                className="flex-shrink-0 w-72 md:w-80 lg:w-96 group/card cursor-pointer"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
                 <div className="relative rounded-2xl overflow-hidden bg-black/40 border border-white/10 hover:border-gold/50 transition-all duration-500">
                   {/* Image Container */}
