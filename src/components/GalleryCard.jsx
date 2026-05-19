@@ -1,12 +1,12 @@
 // src/components/GalleryCard.jsx
 import { useState, forwardRef } from 'react';
 import { motion } from 'framer-motion';
-import { ZoomIn, Tag } from 'lucide-react';
+import { ZoomIn } from 'lucide-react';
 
 function FallbackThumb({ title }) {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-[#111]">
-      <Tag size={22} className="text-gold/30" />
+      <ZoomIn size={22} className="text-gold/30" />
       <span className="font-sans text-[10px] text-white/20 text-center px-3">{title}</span>
     </div>
   );
@@ -70,8 +70,8 @@ const GalleryCard = forwardRef(function GalleryCard({ item, index, onOpen }, ref
           style={{ background: 'rgba(5,5,5,0.5)' }}
         />
 
-        {/* Category pill */}
-        <div
+        {/* Category pill - REMOVED */}
+        {/* <div
           className="absolute top-2.5 left-2.5 font-sans text-[9px] tracking-widest uppercase px-2.5 py-1 rounded-full"
           style={{
             background: 'rgba(212,175,55,0.12)',
@@ -81,7 +81,7 @@ const GalleryCard = forwardRef(function GalleryCard({ item, index, onOpen }, ref
           }}
         >
           {item.category}
-        </div>
+        </div> */}
 
         {/* Zoom icon */}
         <motion.div
