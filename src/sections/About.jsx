@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { GraduationCap, Building2, Briefcase, Wrench, Target, Eye, Users } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 const features = [
   {
@@ -32,38 +31,28 @@ const mvw = [
     label: 'Who We Are',
     heading: "Baramati's Creative Hub",
     body: "JBG Academy of Design is where passion meets profession. We are Baramati's growing hub for creative education—bridging the gap between local ambition and global opportunity through practical learning and industry-focused training. We believe every student deserves the chance to explore their passion without leaving their hometown.",
-    accent: 'from-gold/20 to-transparent',
     border: 'border-gold/20',
   },
   {
     icon: Target,
     label: 'Our Mission',
     heading: 'Passion into Profession',
-    body: 'To provide world-class skills in Fashion, Interiors, Animation & Digital Media that empower Baramati\'s creative minds with industry-ready expertise and global exposure—equipping students with practical knowledge, real-world experience, and future-ready skills to confidently step into the professional world.',
-    accent: 'from-gold/15 to-transparent',
+    body: "To provide world-class skills in Fashion, Interiors, Animation & Digital Media that empower Baramati's creative minds with industry-ready expertise and global exposure—equipping students with practical knowledge, real-world experience, and future-ready skills to confidently step into the professional world.",
     border: 'border-gold/15',
   },
   {
     icon: Eye,
     label: 'Our Vision',
     heading: 'Local Talent, Global Leaders',
-    body: 'To establish Baramati as a premier hub for creative excellence—where local talent is transformed into global design leaders through innovation, technology, and boundless imagination. At JBG, we don\'t just teach design. We shape designers.',
-    accent: 'from-gold/20 to-transparent',
+    body: "To establish Baramati as a premier hub for creative excellence—where local talent is transformed into global design leaders through innovation, technology, and boundless imagination. At JBG, we don't just teach design. We shape designers.",
     border: 'border-gold/20',
   },
 ];
 
 export default function About() {
-  const { ref, isVisible } = useScrollReveal(0.15);
-  const { ref: mvRef, isVisible: mvVisible } = useScrollReveal(0.1);
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  // Preload image on component mount
-  useEffect(() => {
-    const img = new Image();
-    img.src = '/images/gallery/gallery11.JPG';
-    img.onload = () => setImageLoaded(true);
-  }, []);
+  // FIX 1 — lower threshold so animations trigger on mobile too
+  const { ref, isVisible } = useScrollReveal(0.05);
+  const { ref: mvRef, isVisible: mvVisible } = useScrollReveal(0.05);
 
   return (
     <section id="about" className="relative py-16 md:py-28 px-4 md:px-6 overflow-hidden bg-[#050505]">
@@ -75,14 +64,17 @@ export default function About() {
       />
 
       <div ref={ref} className="max-w-7xl mx-auto">
+
         {/* ── Header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-20"
         >
-          <p className="font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-gold mb-4">Our Story</p>
+          <p className="font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-gold mb-4">
+            Our Story
+          </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4">
             About <span className="text-gradient-gold italic">JBG Academy</span>
           </h2>
@@ -96,14 +88,15 @@ export default function About() {
 
         {/* ── Two-column layout ── */}
         <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center mb-16 md:mb-20">
+
+          {/* FIX 2 — removed x:-50 slide on mobile, use y only */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.15 }}
           >
             <div className="relative">
               <div className="img-zoom rounded-2xl overflow-hidden glow-effect">
-                {/* Optimized image with lazy loading and proper sizing */}
                 <img
                   src="/images/gallery/gallery11.JPG"
                   alt="JBG Academy students"
@@ -120,10 +113,11 @@ export default function About() {
             </div>
           </motion.div>
 
+          {/* FIX 2 — removed x:50 slide on mobile */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.3 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.25 }}
             className="space-y-4 md:space-y-6"
           >
             <h3 className="font-display text-2xl md:text-3xl lg:text-4xl text-white font-semibold leading-tight">
@@ -148,7 +142,9 @@ export default function About() {
                   key={lbl}
                   className="glass-card rounded-xl p-3 md:p-4 text-center border border-gold/10"
                 >
-                  <div className="font-display text-xl md:text-2xl font-bold text-gradient-gold">{val}</div>
+                  <div className="font-display text-xl md:text-2xl font-bold text-gradient-gold">
+                    {val}
+                  </div>
                   <div className="font-sans text-[10px] md:text-xs text-white/50 tracking-wider uppercase mt-1">
                     {lbl}
                   </div>
@@ -163,12 +159,11 @@ export default function About() {
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 * i + 0.4 }}
+              transition={{ duration: 0.7, delay: 0.08 * i + 0.3 }}
               whileHover={{ y: -5, scale: 1.01 }}
               className="glass-card rounded-2xl p-4 md:p-6 group cursor-default transition-all duration-500"
-              style={{ boxShadow: '0 0 0 rgba(212,175,55,0)' }}
             >
               <div
                 className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 md:mb-5 group-hover:scale-110 transition-transform duration-300"
@@ -177,26 +172,28 @@ export default function About() {
                   border: '1px solid rgba(212,175,55,0.2)',
                 }}
               >
-                <f.icon size={18} className="text-gold md:w-[22px] md:h-[22px]" />
+                <f.icon size={18} className="text-gold" />
               </div>
-              <h4 className="font-display text-base md:text-lg font-semibold text-white mb-2 md:mb-3">{f.title}</h4>
-              <p className="font-body text-xs md:text-sm text-white/55 leading-relaxed">{f.desc}</p>
+              <h4 className="font-display text-base md:text-lg font-semibold text-white mb-2 md:mb-3">
+                {f.title}
+              </h4>
+              {/* FIX 3 — text-white/58 → text-white/60 (valid Tailwind class) */}
+              <p className="font-body text-xs md:text-sm text-white/60 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* ════════════════════════════════════════
+        {/* ══════════════════════════════════════
             WHO WE ARE · MISSION · VISION
-        ════════════════════════════════════════ */}
+        ══════════════════════════════════════ */}
         <div ref={mvRef} className="mt-16 md:mt-28">
-          {/* Section label */}
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={mvVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
             className="text-center mb-12 md:mb-16"
           >
-            {/* Decorative line */}
             <div className="flex items-center justify-center gap-2 md:gap-4 mb-4 md:mb-6">
               <div className="h-px w-8 md:w-16 bg-gradient-to-r from-transparent to-gold/50" />
               <p className="font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-gold">
@@ -220,16 +217,14 @@ export default function About() {
             {mvw.map((item, i) => (
               <motion.div
                 key={item.label}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 40 }}
                 animate={mvVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: i * 0.15 }}
+                transition={{ duration: 0.8, delay: i * 0.12 }}
                 whileHover={{ y: -4 }}
                 className={`glass-card rounded-2xl p-5 md:p-8 border ${item.border} relative overflow-hidden group cursor-default transition-all duration-500`}
               >
                 {/* Gradient wash on hover */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
-                />
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Icon pill */}
                 <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
@@ -240,7 +235,7 @@ export default function About() {
                       border: '1px solid rgba(212,175,55,0.25)',
                     }}
                   >
-                    <item.icon size={14} className="text-gold md:w-[18px] md:h-[18px]" />
+                    <item.icon size={14} className="text-gold" />
                   </div>
                   <span className="font-sans text-[8px] md:text-[10px] tracking-[0.35em] uppercase text-gold/80">
                     {item.label}
@@ -251,19 +246,19 @@ export default function About() {
                   {item.heading}
                 </h3>
 
-                {/* Thin gold rule */}
                 <div className="w-8 md:w-10 h-px bg-gold/40 mb-3 md:mb-4" />
 
-                <p className="font-body text-xs md:text-sm text-white/58 leading-relaxed">{item.body}</p>
+                {/* FIX 3 — text-white/58 → text-white/60 */}
+                <p className="font-body text-xs md:text-sm text-white/60 leading-relaxed">{item.body}</p>
               </motion.div>
             ))}
           </div>
 
-          {/* Bottom full-width highlight strip - Optimized for mobile */}
+          {/* Bottom highlight strip */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={mvVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.5 }}
+            transition={{ duration: 0.9, delay: 0.4 }}
             className="relative rounded-2xl overflow-hidden border border-gold/15"
             style={{ background: 'rgba(212,175,55,0.04)' }}
           >
@@ -293,7 +288,7 @@ export default function About() {
                     key={i}
                     initial={{ opacity: 0, x: 20 }}
                     animate={mvVisible ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.6 + i * 0.1 }}
+                    transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
                     className="flex items-start gap-2 md:gap-3"
                   >
                     <div className="mt-[6px] w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />

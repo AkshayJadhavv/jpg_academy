@@ -171,10 +171,7 @@ export default function ReelsShowcase() {
               Load More Reels ({reelsData.length - visibleCount} remaining)
             </motion.button>
           </motion.div>
-        )}
-
-        {/* ── Instagram CTA Block ── */}
-        <InstagramCTA />
+        )} 
       </div>
 
       {/* ── Bottom border shimmer ── */}

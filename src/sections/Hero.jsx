@@ -33,40 +33,70 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* YouTube Video Background - Darker overlay for better text visibility */}
+
+      {/* ── Video Background ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="relative w-full h-full scale-125">
+        <div className="relative w-full h-full">
+
+          {/* 
+            Transparent click-blocker div sits on top of the iframe.
+            This blocks ALL mouse interaction with the YouTube player —
+            no play/pause on click, no controls, no YouTube button.
+          */}
+          <div className="absolute inset-0 z-10 pointer-events-auto" />
+
           <iframe
-            className="absolute top-1/2 left-1/2 w-[177.77vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            src="https://www.youtube.com/embed/YzUQiak5VbY?autoplay=1&mute=1&controls=0&loop=1&playlist=YzUQiak5VbY&showinfo=0&modestbranding=1&iv_load_policy=3&rel=0"
+            className="absolute top-1/2 left-1/2 pointer-events-none"
+            style={{
+              width: 'max(100vw, 177.78vh)',   /* always wider than screen */
+              height: 'max(100vh, 56.25vw)',   /* always taller than screen */
+              transform: 'translate(-50%, -50%)',
+              border: 'none',
+            }}
+            src={[
+              'https://www.youtube.com/embed/YzUQiak5VbY',
+              '?autoplay=1',
+              '&mute=1',
+              '&controls=0',         /* hide controls bar */
+              '&loop=1',
+              '&playlist=YzUQiak5VbY',
+              '&showinfo=0',
+              '&modestbranding=1',
+              '&iv_load_policy=3',   /* hide annotations */
+              '&rel=0',
+              '&disablekb=1',        /* disable keyboard shortcuts */
+              '&fs=0',               /* disable fullscreen button */
+              '&playsinline=1',      /* play inline on iOS */
+              '&enablejsapi=1',
+            ].join('')}
             title="JBG Academy Hero Video"
-            frameBorder="0"
             allow="autoplay; fullscreen"
             allowFullScreen
           />
         </div>
-        {/* Stronger overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
-        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Dark overlays for text readability */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
+        <div className="absolute inset-0 z-20 bg-black/35" />
       </div>
 
-      {/* Content — pt-24 ensures content clears the fixed navbar */}
+      {/* ── Content ── */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto pt-24"
+        className="relative z-30 text-center px-6 max-w-5xl mx-auto pt-24"
       >
-        {/* Logo with frosted-glass square background */}
+        {/* Logo */}
         <motion.div variants={itemVariants} className="mb-6 flex justify-center">
           <div
             className="inline-flex items-center justify-center rounded-2xl p-3 sm:p-4"
             style={{
-              background: 'rgba(255, 255, 255, 0.08)',
+              background: 'rgba(255,255,255,0.08)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
             }}
           >
             <img
@@ -77,12 +107,6 @@ export default function Hero() {
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.style.display = 'none';
-                const parent = e.target.parentElement;
-                const fallback = document.createElement('div');
-                fallback.className =
-                  'inline-flex items-center justify-center bg-[#D4AF37] text-black font-bold rounded-full h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 text-2xl sm:text-3xl md:text-4xl mx-auto';
-                fallback.innerText = 'JBG';
-                if (parent) parent.appendChild(fallback);
               }}
             />
           </div>
@@ -102,7 +126,8 @@ export default function Hero() {
           variants={itemVariants}
           className="font-body text-sm sm:text-base md:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed mb-10"
         >
-          Transform your creative passion into a professional career with industry-leading courses in Design, Animation, and Event Management.
+          Transform your creative passion into a professional career with industry-leading courses
+          in Design, Animation, and Event Management.
         </motion.p>
 
         <motion.div
@@ -148,8 +173,12 @@ export default function Hero() {
               whileHover={{ scale: 1.03, y: -4 }}
               className="rounded-2xl p-4 text-center cursor-default backdrop-blur-sm bg-black/40 border border-white/15 transition-all duration-300"
             >
-              <div className="font-display text-xl md:text-2xl font-bold text-[#D4AF37] mb-1">{stat.value}</div>
-              <div className="font-sans text-[11px] text-white/70 tracking-wider uppercase">{stat.label}</div>
+              <div className="font-display text-xl md:text-2xl font-bold text-[#D4AF37] mb-1">
+                {stat.value}
+              </div>
+              <div className="font-sans text-[11px] text-white/70 tracking-wider uppercase">
+                {stat.label}
+              </div>
             </motion.div>
           ))}
         </motion.div>
