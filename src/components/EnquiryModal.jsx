@@ -4,7 +4,7 @@ import { X, Send, CheckCircle2, ChevronDown } from 'lucide-react';
 
 
 const GOOGLE_SHEET_URL =
-  '';
+  'https://script.google.com/macros/s/AKfycbwUhWAdeRcN6192k4LgdepDtolfgV-l_35nmjF2CY2bTud_OZ3ad8gcKh0B386F3FVUJQ/exec';
 
 const courseList = [
   'Fashion Design',

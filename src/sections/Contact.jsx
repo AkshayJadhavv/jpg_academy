@@ -4,7 +4,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Phone, Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
 const GOOGLE_SHEET_URL =
-  '';
+  'https://script.google.com/macros/s/AKfycbwUhWAdeRcN6192k4LgdepDtolfgV-l_35nmjF2CY2bTud_OZ3ad8gcKh0B386F3FVUJQ/exec';
 
 export default function Contact() {
   const { ref, isVisible } = useScrollReveal(0.1);
